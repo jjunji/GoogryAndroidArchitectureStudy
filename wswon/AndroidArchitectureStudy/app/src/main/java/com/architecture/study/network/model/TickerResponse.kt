@@ -1,5 +1,6 @@
 package com.architecture.study.network.model
 
+import android.content.Context
 import com.architecture.study.R
 import com.architecture.study.data.model.Ticker
 import com.google.gson.annotations.SerializedName
@@ -60,7 +61,7 @@ data class TickerResponse(
     @SerializedName("trade_volume")
     val tradeVolume: Double
 ) {
-    fun toTicker(monetaryUnitList: List<String>): Ticker {
+    fun toTicker(context: Context): Ticker {
         val unitName = market.split("-")[0]
         val coinName = market.split("-")[1]
         val nowPrice = DecimalFormat("0.########").format(tradePrice)
@@ -76,10 +77,10 @@ data class TickerResponse(
             compareYesterdayTextColor = R.color.colorBlue
         }
         val transactionAmount = when (market.split("-")[0]) {
-            monetaryUnitList[0] -> {
+            context.getString(R.string.monetary_unit_1) -> {
                 String.format("%,d", (accTradePrice24h / 1000000).toInt()) + "M"
             }
-            monetaryUnitList[1] -> {
+            context.getString(R.string.monetary_unit_2) -> {
                 String.format(
                     "%,d",
                     DecimalFormat("0.###").format(accTradePrice24h).split(".")[0].toInt()
@@ -89,7 +90,7 @@ data class TickerResponse(
                     ""
                 }
             }
-            monetaryUnitList[2] -> {
+            context.getString(R.string.monetary_unit_3) -> {
                 String.format(
                     "%,d",
                     DecimalFormat("0.###").format(accTradePrice24h).split(".")[0].toInt()
@@ -99,7 +100,7 @@ data class TickerResponse(
                     ""
                 }
             }
-            monetaryUnitList[monetaryUnitList.lastIndex] -> {
+            context.getString(R.string.monetary_unit_4) -> {
                 String.format(
                     "%,d",
                     DecimalFormat("0.###").format(accTradePrice24h / 1000).split(".")[0].toInt()
