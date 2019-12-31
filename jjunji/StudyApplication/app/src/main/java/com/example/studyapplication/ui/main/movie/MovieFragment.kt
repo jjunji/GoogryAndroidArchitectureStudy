@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.studyapplication.R
+import com.example.studyapplication.data.datasource.local.NaverLocalDataSourceImpl
 import com.example.studyapplication.data.datasource.remote.NaverRemoteDataSourceImpl
 import com.example.studyapplication.data.model.SearchMovieResult
 import com.example.studyapplication.data.repository.NaverSearchRepository
@@ -16,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_movie.*
 class MovieFragment : SearchFragment(R.layout.fragment_movie), MovieContract.View {
     private lateinit var movieAdapter: MovieAdapter
     private lateinit var presenter : MovieContract.Presenter
-    private val repository: NaverSearchRepository = NaverSearchRepositoryImpl(NaverRemoteDataSourceImpl())
+    private val repository: NaverSearchRepository = NaverSearchRepositoryImpl(NaverRemoteDataSourceImpl(), NaverLocalDataSourceImpl())
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -37,6 +38,7 @@ class MovieFragment : SearchFragment(R.layout.fragment_movie), MovieContract.Vie
 
     override fun showList(items: Array<SearchMovieResult.MovieInfo>) {
         movieAdapter.resetItem(items)
+        presenter.insertCacheData(items)
     }
 
     @SuppressLint("ShowToast")

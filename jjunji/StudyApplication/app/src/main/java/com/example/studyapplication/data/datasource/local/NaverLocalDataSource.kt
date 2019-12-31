@@ -1,5 +1,7 @@
 package com.example.studyapplication.data.datasource.local
 
-interface NaverLocalDataSource {
+import com.example.studyapplication.data.model.SearchMovieResult
 
+interface NaverLocalDataSource {
+    fun insertCacheData(items: Array<SearchMovieResult.MovieInfo>)
 }
