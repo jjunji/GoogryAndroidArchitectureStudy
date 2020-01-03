@@ -11,13 +11,17 @@ class MoviePresenter (val view: MovieContract.View, private val repository: Nave
                 val searchData : SearchMovieResult? = result as SearchMovieResult
                 searchData?.let {
                     view.showList(searchData.arrMovieInfo)
+//                    view.insertCacheData(searchData.arrMovieInfo)
                 }
             }
 
-            override fun failed() {
-                TODO()
+            override fun failed(errorMessage: String) {
+                view.toastErrorConnFailed(errorMessage)
             }
         })
     }
 
+    override fun insertCacheData(items: Array<SearchMovieResult.MovieInfo>) {
+        repository.setCacheMovieList(items)
+    }
 }

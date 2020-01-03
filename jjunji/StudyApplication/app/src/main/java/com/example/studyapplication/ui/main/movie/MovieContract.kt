@@ -5,9 +5,12 @@ import com.example.studyapplication.data.model.SearchMovieResult
 interface MovieContract {
     interface View {
         fun showList(items: Array<SearchMovieResult.MovieInfo>)
+//        fun insertCacheData(items: Array<SearchMovieResult.MovieInfo>)
+        fun toastErrorConnFailed(message : String)
     }
 
     interface Presenter {
         fun clickSearchButton(query : String)
+        fun insertCacheData(items: Array<SearchMovieResult.MovieInfo>)
     }
 }

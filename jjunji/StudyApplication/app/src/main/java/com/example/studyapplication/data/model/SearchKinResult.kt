@@ -1,8 +1,9 @@
 package com.example.studyapplication.data.model
 
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmObject
 
-class SearchKinResult {
+class SearchKinResult : RealmObject() {
     @SerializedName("items")
     val arrKinInfo = emptyArray<KinInfo>()
 

@@ -1,5 +1,6 @@
 package com.example.studyapplication.data.repository
 
+import com.example.studyapplication.data.model.SearchMovieResult
 import com.example.studyapplication.network.Conn
 
 interface NaverSearchRepository {
@@ -14,4 +15,12 @@ interface NaverSearchRepository {
 
     // 지식인 검색 결과 가져오기
     fun getKinList(title : String, conn : Conn)
+
+    fun setCacheMovieList(items: Array<SearchMovieResult.MovieInfo>)
+
+    fun setCacheBlogList()
+
+    fun setCacheImageList()
+
+    fun setCacheKinList()
 }
